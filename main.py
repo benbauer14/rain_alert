@@ -11,6 +11,17 @@ data = requests.get(f"https://api.openweathermap.org/data/2.5/onecall", params=w
 
 
 
-print(data.status_code)
-print(data.json())
-print(data.json()["hourly"][0]["weather"])
+# print(data.status_code)
+# print(data.json())
+# print(data.json()["hourly"][0]["weather"])
+
+def willRain():
+    hourly_data = data.json()["hourly"]
+    for hours in hourly_data:
+
+        weather_description = hours["weather"][0]["description"]
+        if "rain" in weather_description:
+            print("gonna rain homie")
+            break
+
+willRain()
