@@ -17,9 +17,9 @@ data = requests.get(f"https://api.openweathermap.org/data/2.5/onecall", params=w
 
 def willRain():
     hourly_data = data.json()["hourly"]
-    for hours in hourly_data:
+    for hours in range(0, 12):
 
-        weather_description = hours["weather"][0]["description"]
+        weather_description = hourly_data[hours]["weather"][0]["description"]
         if "rain" in weather_description:
             print("gonna rain homie")
             break
