@@ -1,6 +1,8 @@
 import requests
+import twilio
+from twilio.rest import Client
 
-api_key = "d562fb9cb9c7ae37f25eb6c3c61b83c2"
+api_key = ""
 
 weather_params = {
     "lat": "44.876786683641164",
@@ -9,11 +11,16 @@ weather_params = {
 }
 data = requests.get(f"https://api.openweathermap.org/data/2.5/onecall", params=weather_params)
 
+account_sid = ""
+auth_token = ""
+client = Client(account_sid, auth_token)
+receiver = "+11234567890"
+sender = "+11234567890"
 
+print(message.sid)
 
-# print(data.status_code)
-# print(data.json())
-# print(data.json()["hourly"][0]["weather"])
+gonna_rain = False
+
 
 def willRain():
     hourly_data = data.json()["hourly"]
@@ -21,7 +28,15 @@ def willRain():
 
         weather_description = hourly_data[hours]["weather"][0]["description"]
         if "rain" in weather_description:
-            print("gonna rain homie")
+            global gonna_rain
+            gonna_rain = True
             break
+    if gonna_rain:
+        message = client.messages \
+                .create(
+                    body="Gonna rain homie!",
+                    from_=sender,
+                    to=receiver
+                )
 
 willRain()
