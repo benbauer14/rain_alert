@@ -5,8 +5,8 @@ from twilio.rest import Client
 api_key = ""
 
 weather_params = {
-    "lat": "44.87678668364",
-    "lon": "-93.456094757",
+    "lat": "44.8767866836",
+    "lon": "-93.45609475",
     "appid": api_key
 }
 data = requests.get(f"https://api.openweathermap.org/data/2.5/onecall", params=weather_params)
